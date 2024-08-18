@@ -1,4 +1,5 @@
-﻿using Packages_service.Data.DbConfig;
+﻿using Microsoft.EntityFrameworkCore;
+using Packages_service.Data.DbConfig;
 
 namespace Packages_service.Data.Repositories
 {
@@ -6,7 +7,7 @@ namespace Packages_service.Data.Repositories
     {
         public void Create(T item);
 
-        public T? GetItemByID(int itemID);
+        public Task<T?> GetItemByID(int itemID);
 
         public void Update(T item);
 
@@ -33,9 +34,9 @@ namespace Packages_service.Data.Repositories
             throw new NotImplementedException();
         }
 
-        public T? GetItemByID(int itemID)
+        public async Task<T?> GetItemByID(int itemID)
         {
-            throw new NotImplementedException();
+            return await _context.Set<T>().FindAsync(itemID);
         }
 
         public void Update(T item)

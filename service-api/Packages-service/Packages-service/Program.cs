@@ -1,5 +1,6 @@
 using Packages_service.Data.DbConfig;
 using Packages_service.Data.Repositories;
+using Packages_service.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddScoped<AppDbContext>();
 builder.Services.AddScoped(typeof(IRepoBase<>), typeof(RepoBase<>));
 
 builder.Services.AddScoped<IResidenceRepo, ResidenceRepo>();
+builder.Services.AddScoped<IResidenceService, ResidenceService>();
 
 var app = builder.Build();
 
