@@ -5,10 +5,11 @@ namespace Packages_service.Data.Services
 {
     public interface IServiceBase<T>
     {
+        public Task<List<T>> GetAll();
+        public Task<T?> GetItemByID(int id);
         public Task<T> Create(T model);
-        public Task<T> GetItemByID(int id);
-        public Task<T> UpdateItemByID(int id, T model);
-        public Task Delete(int id);
+        public Task<T> UpdateItem(T model);
+        public Task<bool> Delete(int id);
     }
 
     public abstract class ServiceBase<T> : IServiceBase<T> where T : class
@@ -20,27 +21,33 @@ namespace Packages_service.Data.Services
             this.repo = repo;
         }
 
-        public Task<T> Create(T model)
+        public async Task<List<T>> GetAll() 
         {
-            repo.Create(model);
-            return Task.FromResult(model);
-          
+            return await repo.GetAll();
         }
 
-        public Task Delete(int id)
+        public async Task<T?> GetItemByID(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public async Task<T> GetItemByID(int id)
-        {
-            //repo.GetItemByID(id);
             return await repo.GetItemByID(id);
         }
 
-        public Task<T> UpdateItemByID(int id, T model)
+        public async Task<T> Create(T model)
         {
-            throw new NotImplementedException();
+            return await repo.Create(model);      
         }
+
+        public async Task<T> UpdateItem(T model)
+        {
+            return await repo.Update(model);
+        }
+
+        public async Task<bool> Delete(int id)
+        {
+            var item = await GetItemByID(id);
+            if (item != null) return await repo.Delete(item);
+            
+            return false;
+        }
+
     }
 }
