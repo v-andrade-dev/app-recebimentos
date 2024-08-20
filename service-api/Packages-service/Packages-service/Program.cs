@@ -16,6 +16,10 @@ builder.Services.AddScoped(typeof(IRepoBase<>), typeof(RepoBase<>));
 
 builder.Services.AddScoped<IResidenceRepo, ResidenceRepo>();
 builder.Services.AddScoped<IResidenceService, ResidenceService>();
+builder.Services.AddScoped<IOwnerRepo, OwnerRepo>();
+builder.Services.AddScoped<IOwnerService, OwnerService>();
+builder.Services.AddScoped<IPackagesRepo, PackagesRepo>();
+builder.Services.AddScoped<IPackagesService, PackagesService>();
 
 var app = builder.Build();
 
