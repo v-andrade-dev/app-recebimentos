@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Packages_service.Data.Services;
+using Packages_service.DTO;
 using Packages_service.Models;
 
 namespace Packages_service.Controllers
@@ -10,10 +12,12 @@ namespace Packages_service.Controllers
     public class OwnerController : ControllerBase
     {
         private readonly IOwnerService baseService;
+        private readonly IMapper mapper;
 
-        public OwnerController(IOwnerService service)
+        public OwnerController(IOwnerService service, IMapper mapper)
         {
             baseService = service;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -48,11 +52,13 @@ namespace Packages_service.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Owner>> Create([FromBody]Owner owner)
+        public async Task<ActionResult<Owner>> Create([FromBody]OwnerCreateDto createDto)
         {
-            await baseService.Create(owner);
+            var model = mapper.Map<Owner>(createDto);
+            await baseService.Create(model);
+            return Ok(model);
 
-            return CreatedAtAction("GetOwner", new { id = owner.Id }, owner);
+            //return CreatedAtAction("GetOwner", new { id = model.Id }, model);
         }
 
         [HttpDelete("{id:int}")]

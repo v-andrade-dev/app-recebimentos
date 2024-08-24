@@ -18,8 +18,8 @@ namespace Packages_service.Data.DbConfig
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Owner>().HasOne(o => o.Residence).WithMany(r => r.Owners).HasForeignKey(o => o.ResidenceID);
-            modelBuilder.Entity<Packages>().HasOne(p => p.Residence).WithMany(r => r.Packages).HasForeignKey(p => p.ResidenceID);
+            //modelBuilder.Entity<Owner>().HasOne(o => o.Residence).WithMany(r => r.Owners).HasForeignKey(o => o.ResidenceID);
+            //modelBuilder.Entity<Packages>().HasOne(p => p.Residence).WithMany(r => r.Packages).HasForeignKey(p => p.ResidenceID);
 
         }
 

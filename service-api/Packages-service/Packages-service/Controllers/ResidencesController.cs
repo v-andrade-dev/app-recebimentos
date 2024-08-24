@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Packages_service.Data.DbConfig;
 using Packages_service.Data.Services;
+using Packages_service.DTO;
 using Packages_service.Models;
 
 namespace Packages_service.Controllers
@@ -16,10 +18,12 @@ namespace Packages_service.Controllers
     public class ResidencesController : ControllerBase
     {
         private readonly IResidenceService baseService;
+        private readonly IMapper mapper;
 
-        public ResidencesController(IResidenceService service)
+        public ResidencesController(IResidenceService service, IMapper mapper)
         {
             baseService = service;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -54,11 +58,13 @@ namespace Packages_service.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Residence>> Create([FromBody]Residence residence)
+        public async Task<ActionResult<Residence>> Create([FromBody]ResidenceCreateDto createDto)
         {
-            await baseService.Create(residence);
+            var model = mapper.Map<Residence>(createDto);
+            await baseService.Create(model);
+            return Ok(model);
 
-            return CreatedAtAction("GetResidence", new { id = residence.Id }, residence);
+            //return CreatedAtAction("GetResidence", new { id = residence.Id }, residence);
         }
             
         [HttpDelete("{id:int}")]

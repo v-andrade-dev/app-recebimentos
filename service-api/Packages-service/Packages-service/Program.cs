@@ -1,6 +1,8 @@
+using AutoMapper;
 using Packages_service.Data.DbConfig;
 using Packages_service.Data.Repositories;
 using Packages_service.Data.Services;
+using Packages_service.DTO;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +14,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<AppDbContext>();
-builder.Services.AddScoped(typeof(IRepoBase<>), typeof(RepoBase<>));
+builder.Services.AddAutoMapper(typeof(Profiles));
 
+builder.Services.AddScoped(typeof(IRepoBase<>), typeof(RepoBase<>));
 builder.Services.AddScoped<IResidenceRepo, ResidenceRepo>();
 builder.Services.AddScoped<IResidenceService, ResidenceService>();
 builder.Services.AddScoped<IOwnerRepo, OwnerRepo>();

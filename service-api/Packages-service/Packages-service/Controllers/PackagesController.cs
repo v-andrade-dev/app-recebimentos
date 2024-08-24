@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Packages_service.Data.Services;
+using Packages_service.DTO;
 using Packages_service.Models;
 
 namespace Packages_service.Controllers
@@ -10,10 +12,12 @@ namespace Packages_service.Controllers
     public class PackagesController : ControllerBase
     {
         private readonly IPackagesService baseService;
+        private readonly IMapper mapper;
 
-        public PackagesController(IPackagesService service)
+        public PackagesController(IPackagesService service, IMapper mapper)
         {
             baseService = service;
+            this.mapper = mapper;
         }
 
 
@@ -49,11 +53,13 @@ namespace Packages_service.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Packages>> Create([FromBody] Packages packages)
+        public async Task<ActionResult<Packages>> Create([FromBody] PackagesCreateDto createDto)
         {
-            await baseService.Create(packages);
+            var model = mapper.Map<Packages>(createDto);
+            await baseService.Create(model);
 
-            return CreatedAtAction("GetPackages", new { id = packages.Id }, packages);
+            return Ok(model);
+            //return CreatedAtAction("GetPackages", new { id = packages.Id }, packages);
         }
 
         [HttpDelete("{id:int}")]
