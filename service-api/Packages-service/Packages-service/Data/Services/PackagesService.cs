@@ -7,6 +7,7 @@ namespace Packages_service.Data.Services
     public interface IPackagesService : IServiceBase<Packages>
     {
         public Task<List<Packages>> GetAllPackages();
+        public new Task<Packages?> GetItemByID(int id);
     }
 
     public class PackagesService : ServiceBase<Packages>, IPackagesService
@@ -23,5 +24,11 @@ namespace Packages_service.Data.Services
             return await BaseRepo.GetAll().Include(ds => ds.Residence).ToListAsync();
         }
 
+        public new async Task<Packages?> GetItemByID(int id)
+        {
+            var packages = await GetAllPackages();
+
+            return packages.Find(element => element.Id == id);
+        }
     }
 }

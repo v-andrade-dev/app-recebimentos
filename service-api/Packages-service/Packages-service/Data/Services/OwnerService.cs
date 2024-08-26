@@ -7,6 +7,7 @@ namespace Packages_service.Data.Services
     public interface IOwnerService : IServiceBase<Owner>
     {
         public Task<List<Owner>> GetAllOwners();
+        public new Task<Owner?> GetItemByID(int id);
     }
 
     public class OwnerService : ServiceBase<Owner>, IOwnerService
@@ -20,6 +21,13 @@ namespace Packages_service.Data.Services
         {
             return await BaseRepo.GetAll().Include(o => o.Residence).ToListAsync();
            
-        } 
+        }
+        
+        public new async Task<Owner?> GetItemByID(int id)
+        {
+            var owners = await GetAllOwners();
+
+            return owners.Find(o => o.Id == id);
+        }
     }
 }
