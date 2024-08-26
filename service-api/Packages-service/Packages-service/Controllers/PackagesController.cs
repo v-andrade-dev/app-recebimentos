@@ -22,9 +22,13 @@ namespace Packages_service.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Packages>>> GetAll()
+        public async Task<ActionResult<IEnumerable<PackagesReadDto>>> GetAll()
         {
-            return await baseService.GetAll();
+            var models = await baseService.GetAllPackages();
+
+            var dtos = mapper.Map<List<PackagesReadDto>>(models);
+
+            return dtos;
         }
 
         [HttpGet("{id:int}")]

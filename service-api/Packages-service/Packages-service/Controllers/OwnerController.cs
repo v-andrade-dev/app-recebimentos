@@ -21,13 +21,15 @@ namespace Packages_service.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Owner>>> GetAll()
-        {
-            return await baseService.GetAll();
+        public async Task<ActionResult<IEnumerable<OwnerReadDto>>> GetAll()
+        {   
+            var owners =  await baseService.GetAllOwners();
+            var dtos = mapper.Map<List<OwnerReadDto>>(owners);
+            return dtos;
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Owner>> GetItemById([FromRoute]int id)
+        public async Task<ActionResult<OwnerReadDto>> GetItemById([FromRoute]int id)
         {
             var owner = await baseService.GetItemByID(id);
 
@@ -35,8 +37,8 @@ namespace Packages_service.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(owner);
+            var dto = mapper.Map<OwnerReadDto>(owner);
+            return Ok(dto);
         }
 
         [HttpPut("{id:int}")]

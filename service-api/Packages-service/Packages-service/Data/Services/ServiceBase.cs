@@ -5,7 +5,7 @@ namespace Packages_service.Data.Services
 {
     public interface IServiceBase<T>
     {
-        public Task<List<T>> GetAll();
+        public List<T> GetAll();
         public Task<T?> GetItemByID(int id);
         public Task<T> Create(T model);
         public Task<T> UpdateItem(T model);
@@ -21,9 +21,9 @@ namespace Packages_service.Data.Services
             this.repo = repo;
         }
 
-        public async Task<List<T>> GetAll() 
+        public List<T> GetAll() 
         {
-            return await repo.GetAll();
+            return repo.GetAll().ToList();
         }
 
         public async Task<T?> GetItemByID(int id)

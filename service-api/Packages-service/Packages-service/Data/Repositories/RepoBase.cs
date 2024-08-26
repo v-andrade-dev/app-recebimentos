@@ -6,7 +6,7 @@ namespace Packages_service.Data.Repositories
 {
     public interface IRepoBase<T>
     {
-        public Task<List<T>> GetAll();
+        public IQueryable<T> GetAll();
         public Task<T?> GetItemByID(int itemID);
         public Task<T> Create(T item);
         public Task<T> Update(T item);
@@ -23,9 +23,9 @@ namespace Packages_service.Data.Repositories
             _context = context;
         }
 
-        public async Task<List<T>> GetAll()
+        public IQueryable<T> GetAll()
         {
-            return await Model.ToListAsync();
+            return Model.AsNoTracking();         
         }
 
         public async Task<T?> GetItemByID(int itemID)

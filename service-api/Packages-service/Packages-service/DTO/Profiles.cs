@@ -10,6 +10,11 @@ namespace Packages_service.DTO
             CreateMap<ResidenceCreateDto, Residence>();
             CreateMap<OwnerCreateDto, Owner>();
             CreateMap<PackagesCreateDto, Packages>();
+
+            CreateMap<Residence, ResidenceReadDto>();
+            CreateMap<Owner, OwnerReadDto>().ForMember(dest => dest.Residence, opt => opt.MapFrom(src => src.Residence));
+            CreateMap<Packages, PackagesReadDto>().ForMember(dest => dest.Residence, opt => opt.MapFrom(src => src.Residence));
+
         }
     }
 }

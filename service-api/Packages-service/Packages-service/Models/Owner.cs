@@ -9,5 +9,6 @@ namespace Packages_service.Models
         public required string Document { get; set; }
         public required string Email { get; set; }
         public required int ResidenceID { get; set; }
+        public Residence? Residence { get; set; }
     }
 }

@@ -11,5 +11,6 @@ namespace Packages_service.Models
         public string? Receiver { get; set; }
         public bool? Finish { get; set; }
         public required int ResidenceID { get; set; }
+        public Residence? Residence { get; set; }
     }
 }

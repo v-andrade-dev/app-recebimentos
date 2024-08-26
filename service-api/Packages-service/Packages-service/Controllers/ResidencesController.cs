@@ -29,7 +29,7 @@ namespace Packages_service.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Residence>>> GetAll()
         {
-            return await baseService.GetAll();
+            return await baseService.GetAllResidences();
         }
 
         [HttpGet("{id:int}")]
