@@ -32,7 +32,7 @@ namespace Packages_service.Controllers
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Packages>> GetItemById([FromRoute] int id)
+        public async Task<ActionResult<PackagesReadDto>> GetItemById([FromRoute] int id)
         {
             var packages = await baseService.GetItemByID(id);
 
@@ -40,29 +40,40 @@ namespace Packages_service.Controllers
             {
                 return NotFound();
             }
-
-            return Ok(packages);
+            
+            var dto = mapper.Map<PackagesReadDto>(packages);
+            return Ok(dto);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] Packages packages)
+        public async Task<ActionResult<PackagesReadDto>> Update([FromRoute] int id, [FromBody] PackagesUpdateDto packagesDto)
         {
-            if (id != packages.Id)
+            if (id != packagesDto.Id)
             {
                 return BadRequest();
             }
 
-            await baseService.UpdateItem(packages);
-            return Ok();
+            var model = await baseService.GetItemByID(id);
+            model.OwnerName = packagesDto.OwnerName ?? model.OwnerName;
+            model.Shipper = packagesDto.Shipper ?? model.Shipper;
+            model.DeliveryDate = packagesDto.DeliveryDate;
+            model.Receiver = packagesDto.Receiver ?? model.Receiver;
+            model.ResidenceID = packagesDto.ResidenceID ?? model.ResidenceID; 
+
+            await baseService.UpdateItem(model);
+            var dto = mapper.Map<PackagesReadDto>(model);
+            return Ok(dto);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Packages>> Create([FromBody] PackagesCreateDto createDto)
+        public async Task<ActionResult<PackagesReadDto>> Create([FromBody] PackagesCreateDto createDto)
         {
             var model = mapper.Map<Packages>(createDto);
             await baseService.Create(model);
 
-            return Ok(model);
+            var dto = mapper.Map<PackagesReadDto>(model);
+
+            return Ok(dto);
             //return CreatedAtAction("GetPackages", new { id = packages.Id }, packages);
         }
 

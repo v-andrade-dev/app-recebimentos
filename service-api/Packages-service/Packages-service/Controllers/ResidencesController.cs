@@ -27,42 +27,55 @@ namespace Packages_service.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Residence>>> GetAll()
+        public async Task<ActionResult<IEnumerable<ResidenceReadDto>>> GetAll()
         {
-            return await baseService.GetAllResidences();
+            var models = await baseService.GetAllResidences();
+            var dtos = mapper.Map<List<ResidenceReadDto>>(models);
+
+            return Ok(dtos);
         }
 
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Residence>> GetItemById([FromRoute] int id)
+        public async Task<ActionResult<ResidenceReadDto>> GetItemById([FromRoute] int id)
         {
-            var residence = await baseService.GetItemByID(id);
+            var model = await baseService.GetItemByID(id);
 
-            if (residence == null)
+            if (model == null)
             {
                 return NotFound();
             }
 
-            return Ok(residence);
+            var dto = mapper.Map<ResidenceReadDto>(model);
+
+            return Ok(dto);
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update([FromRoute] int id, [FromBody]Residence residence)
+        public async Task<ActionResult<ResidenceReadDto>> Update([FromRoute] int id, [FromBody]ResidenceUpdateDto residenceDto)
         {
-            if (id != residence.Id)
+            if (id != residenceDto.Id)
             {
                 return BadRequest();
             }
 
-            await baseService.UpdateItem(residence);
-            return Ok();
+            var model = await baseService.GetItemByID(id);
+            model.Number = residenceDto.Number ?? model.Number;
+            model.Complement = residenceDto.Complement;
+
+            await baseService.UpdateItem(model);
+            var dto = mapper.Map<ResidenceReadDto>(model);
+            
+            return Ok(dto);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Residence>> Create([FromBody]ResidenceCreateDto createDto)
+        public async Task<ActionResult<ResidenceReadDto>> Create([FromBody]ResidenceCreateDto createDto)
         {
             var model = mapper.Map<Residence>(createDto);
             await baseService.Create(model);
-            return Ok(model);
+
+            var dto = mapper.Map<ResidenceReadDto>(model);
+            return Ok(dto);
 
             //return CreatedAtAction("GetResidence", new { id = residence.Id }, residence);
         }

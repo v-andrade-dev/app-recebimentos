@@ -42,23 +42,32 @@ namespace Packages_service.Controllers
         }
 
         [HttpPut("{id:int}")]
-        public async Task<IActionResult> Update([FromRoute]int id, [FromBody]Owner owner)
+        public async Task<ActionResult<OwnerReadDto>> Update([FromRoute]int id, [FromBody]OwnerUpdateDto ownerUpdateDto)
         {
-            if (id != owner.Id)
+            if (id != ownerUpdateDto.Id)
             {
                 return BadRequest();
             }
 
-            await baseService.UpdateItem(owner);
-            return Ok();
+            var model = await baseService.GetItemByID(id);
+          
+            model.Name = ownerUpdateDto.Name ?? model.Name;
+            model.Email = ownerUpdateDto?.Email ?? model.Email;
+            model.ResidenceID = ownerUpdateDto.ResidenceId ?? model.ResidenceID;
+
+            await baseService.UpdateItem(model);
+            var dto = mapper.Map<OwnerReadDto>(model);
+            return Ok(dto);
         }
 
         [HttpPost]
-        public async Task<ActionResult<Owner>> Create([FromBody]OwnerCreateDto createDto)
+        public async Task<ActionResult<OwnerReadDto>> Create([FromBody]OwnerCreateDto createDto)
         {
             var model = mapper.Map<Owner>(createDto);
             await baseService.Create(model);
-            return Ok(model);
+
+            var dto = mapper.Map<OwnerReadDto>(model);
+            return Ok(dto);
 
             //return CreatedAtAction("GetOwner", new { id = model.Id }, model);
         }
