@@ -11,15 +11,19 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("App"),
-      ),
-      body: Center(
+        body: Container(
+      decoration:
+          const BoxDecoration(color: Color.fromARGB(255, 146, 247, 155)),
+      child: Center(
         child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
+                Image.asset(
+                  "assets/images/icon.png",
+                  height: 50,
+                ),
                 SizedBox(
                   width: 400,
                   child: TextFormField(
@@ -32,9 +36,15 @@ class _LoginState extends State<Login> {
                     decoration: const InputDecoration(labelText: "Senha"),
                   ),
                 ),
+                SizedBox(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text("Entrar"),
+                  ),
+                )
               ],
             )),
       ),
-    );
+    ));
   }
 }
