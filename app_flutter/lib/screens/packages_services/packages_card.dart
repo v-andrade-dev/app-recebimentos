@@ -17,12 +17,15 @@ class PackagesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: MediaQuery.sizeOf(context).width,
-        child: Container(
-          //decoration: BoxDecoration(
-          //border: Border.all(color: AppColors.secondary, width: 3)),
-          child: Card(
-            color: AppColors.primary,
+      width: MediaQuery.sizeOf(context).width,
+      child: ClipRRect(
+        borderRadius: const BorderRadius.all(Radius.circular(32)),
+        //decoration: BoxDecoration(
+        //border: Border.all(color: AppColors.secondary, width: 3)),
+        child: Card(
+          color: AppColors.primary,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
@@ -37,6 +40,8 @@ class PackagesCard extends StatelessWidget {
                   ),
                 ]),
           ),
-        ));
+        ),
+      ),
+    );
   }
 }
