@@ -1,4 +1,5 @@
 import 'package:app_flutter/resource/app_colors.dart';
+import 'package:app_flutter/resource/custom_card.dart';
 import 'package:flutter/material.dart';
 
 class Notifications extends StatefulWidget {
@@ -14,10 +15,11 @@ class _NotificationsState extends State<Notifications> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           "Notificações",
+          style: TextStyle(color: AppColors.secondary.withGreen(100)),
         ),
-        backgroundColor: AppColors.secondary,
+        backgroundColor: AppColors.primary,
       ),
       body: Container(
         //decoration: BoxDecoration(color: AppColors.primary.withOpacity(0.3)),
@@ -25,25 +27,9 @@ class _NotificationsState extends State<Notifications> {
         child: ListView.builder(
           itemCount: list.length,
           itemBuilder: ((context, index) {
-            return ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(24)),
-              child: Card(
-                  //color: AppColors.primary.withOpacity(0.3),
-                  child: Padding(
-                padding: const EdgeInsets.all(4),
-                child: SizedBox(
-                  height: 50,
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Text("Titulo"),
-                        Text(
-                          list[index].toString(),
-                        ),
-                      ]),
-                ),
-              )),
+            return CustomCard(
+              title: "Titulo",
+              message: list[index].toString(),
             );
           }),
         ),
