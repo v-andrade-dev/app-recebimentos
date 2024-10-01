@@ -1,5 +1,6 @@
 import 'package:app_flutter/resource/app_colors.dart';
 import 'package:app_flutter/screens/packages_services/packages_card.dart';
+import 'package:app_flutter/screens/packages_services/pending_packages.dart';
 import 'package:flutter/material.dart';
 
 class UserServices extends StatelessWidget {
@@ -30,6 +31,12 @@ class UserServices extends StatelessWidget {
           const Divider(),
           Column(children: [
             GestureDetector(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const PendingPackages()));
+              },
               child: const PackagesCard(
                 imageSource: "assets/images/closed2.png",
                 title: "Entregas Pendentes",
