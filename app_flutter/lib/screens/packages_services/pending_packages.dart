@@ -25,14 +25,48 @@ class _PendingPackagesState extends State<PendingPackages> {
             onPressed: () => Navigator.pop(context),
           )),
       body: Column(
-        children: [
-          PackagesCard(
-            imageSource: "assets/images/closed2.png",
-            title: "Titulo",
-            height: 50,
-          )
-        ],
+        children: getPackages(),
       ),
     );
+  }
+
+  List<Widget> getPackages() {
+    List<Widget> list = [
+      Padding(
+          padding: const EdgeInsets.all(8),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(24)),
+            child: Container(
+              decoration: BoxDecoration(color: AppColors.primary),
+              child: ExpansionTile(
+                title: Container(
+                  child: Text("Item 1"),
+                ),
+                children: [
+                  PackagesCard(
+                      imageSource: "assets/images/closed2.png", title: "Titulo")
+                ],
+              ),
+            ),
+          )),
+      Padding(
+          padding: const EdgeInsets.all(8),
+          child: ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(24)),
+            child: Container(
+              decoration: BoxDecoration(color: AppColors.primary),
+              child: ExpansionTile(
+                title: Container(
+                  child: Text("Item 2"),
+                ),
+                children: [
+                  PackagesCard(
+                      imageSource: "assets/images/closed2.png", title: "Titulo")
+                ],
+              ),
+            ),
+          )),
+    ];
+    return list;
   }
 }

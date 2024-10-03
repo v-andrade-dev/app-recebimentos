@@ -3,8 +3,8 @@ import 'package:app_flutter/screens/packages_services/packages_card.dart';
 import 'package:app_flutter/screens/packages_services/pending_packages.dart';
 import 'package:flutter/material.dart';
 
-class UserServices extends StatelessWidget {
-  const UserServices({super.key});
+class OwnerServices extends StatelessWidget {
+  const OwnerServices({super.key});
 
   @override
   Widget build(BuildContext context) {
