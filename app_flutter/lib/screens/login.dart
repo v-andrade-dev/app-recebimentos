@@ -53,7 +53,7 @@ class _LoginState extends State<Login> {
                         backgroundColor: AppColors.secondary),
                     child: const Text(
                       "Entrar",
-                      style: TextStyle(color: AppColors.white),
+                      style: TextStyle(color: AppColors.neutral),
                     ),
                   ),
                 )
