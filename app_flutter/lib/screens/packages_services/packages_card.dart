@@ -29,14 +29,20 @@ class PackagesCard extends StatelessWidget {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  Text(
-                    title,
-                    //style: TextStyle(fontSize: 18),
+                  SizedBox(
+                    width: width! / 2,
+                    child: Text(
+                      title,
+                      //style: TextStyle(fontSize: 18),
+                    ),
                   ),
-                  Image.asset(
-                    imageSource,
-                    width: width,
-                    height: height,
+                  SizedBox(
+                    width: width! / 2,
+                    child: Image.asset(
+                      imageSource,
+                      width: width,
+                      height: height,
+                    ),
                   ),
                 ]),
           ),

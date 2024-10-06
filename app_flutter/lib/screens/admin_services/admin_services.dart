@@ -10,9 +10,21 @@ class AdminServices extends StatefulWidget {
 }
 
 class _AdminServicesState extends State<AdminServices> {
+  List<String> agendadas = [
+    "Entrega Programada 1",
+    "Entrega Programada 2",
+    "Entrega Programada 3",
+    "Entrega Programada 4",
+    "Entrega Programada 5",
+    "Entrega Programada 6"
+  ];
+
+  DateTime date = DateTime.now();
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Container(
+        height: MediaQuery.sizeOf(context).height,
         padding: const EdgeInsets.fromLTRB(16, 64, 24, 16),
         child: Column(children: [
           const Align(
@@ -27,37 +39,51 @@ class _AdminServicesState extends State<AdminServices> {
                 "Usuário ",
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               )),
-          const Text("Avisos",
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-          const Text("Não há entregas pendentes."),
           const Divider(),
-          Column(children: [
-            GestureDetector(
-              onTap: () {},
-              child: const PackagesCard(
-                imageSource: "assets/images/closed2.png",
-                title: "Nova Encomenda",
-              ),
-            ),
-            GestureDetector(
-              child: const PackagesCard(
-                imageSource: "assets/images/open2.png",
-                title: "Novo Usuário",
-              ),
-            ),
-          ]),
+          const Text("Entregas Programadas",
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
+          Text(date.toString()),
+          SizedBox(
+            height: 250,
+            width: 300,
+            child: SingleChildScrollView(
+                child: Column(
+              children: getScheduled(),
+            )),
+          ),
+          const Divider(),
           GestureDetector(
+            onTap: () {},
             child: const PackagesCard(
-              imageSource: "assets/images/closed2.png",
-              title: "Entregas Pendentes",
+              imageSource: "assets/images/icon.png",
+              title: "Nova Encomenda",
+              height: 50,
             ),
           ),
           GestureDetector(
             child: const PackagesCard(
-              imageSource: "assets/images/open2.png",
+              imageSource: "assets/images/user.png",
+              title: "Gerenciar Usuários",
+              height: 50,
+            ),
+          ),
+          GestureDetector(
+            child: const PackagesCard(
+              imageSource: "assets/images/finish.png",
               title: "Entregas Finalizadas",
+              height: 50,
             ),
           ),
         ]));
+  }
+
+  List<Widget> getScheduled() {
+    List<Widget> list = [];
+
+    for (var element in agendadas) {
+      list.add(ListTile(title: (Text(element))));
+    }
+
+    return list;
   }
 }

@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 enum Users { admin, owner }
 
 class Home extends StatefulWidget {
-  const Home({super.key, this.user = Users.admin});
+  const Home({super.key, this.user = Users.owner});
 
   final Users user;
 
@@ -37,9 +37,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: null,
-        body: Container(
-          child: _tabs[_currentIndex],
-        ),
+        body: SingleChildScrollView(
+            child: Column(children: [
+          Container(
+              height: MediaQuery.sizeOf(context).height,
+              child: _tabs[_currentIndex]),
+        ])),
         bottomNavigationBar:
             CustomNavBar(currentIndex: _currentIndex, setIndex: changeIndex));
   }
