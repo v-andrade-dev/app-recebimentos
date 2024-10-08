@@ -1,3 +1,4 @@
+import 'package:app_flutter/screens/admin_services/new_package.dart';
 import 'package:app_flutter/screens/packages_services/packages_card.dart';
 import 'package:app_flutter/screens/packages_services/pending_packages.dart';
 import 'package:flutter/material.dart';
@@ -53,7 +54,10 @@ class _AdminServicesState extends State<AdminServices> {
           ),
           const Divider(),
           GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const NewPackage()));
+            },
             child: const PackagesCard(
               imageSource: "assets/images/icon.png",
               title: "Nova Encomenda",
