@@ -23,7 +23,7 @@ class PackagesCard extends StatelessWidget {
         //decoration: BoxDecoration(
         //border: Border.all(color: AppColors.secondary, width: 3)),
         child: Card(
-          color: AppColors.primary,
+          color: AppColors.secondary,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Row(
@@ -33,7 +33,7 @@ class PackagesCard extends StatelessWidget {
                     width: width! / 2,
                     child: Text(
                       title,
-                      //style: TextStyle(fontSize: 18),
+                      style: const TextStyle(color: AppColors.neutral),
                     ),
                   ),
                   SizedBox(

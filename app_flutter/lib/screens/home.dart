@@ -1,3 +1,4 @@
+import 'package:app_flutter/resource/app_colors.dart';
 import 'package:app_flutter/resource/custom_navbar.dart';
 import 'package:app_flutter/screens/notifications.dart';
 import 'package:app_flutter/screens/options.dart';
@@ -8,7 +9,7 @@ import 'package:flutter/material.dart';
 enum Users { admin, owner }
 
 class Home extends StatefulWidget {
-  const Home({super.key, this.user = Users.admin});
+  const Home({super.key, this.user = Users.owner});
 
   final Users user;
 
@@ -40,6 +41,7 @@ class _HomeState extends State<Home> {
         body: SingleChildScrollView(
             child: Column(children: [
           Container(
+              decoration: const BoxDecoration(color: AppColors.neutral),
               height: MediaQuery.sizeOf(context).height,
               child: _tabs[_currentIndex]),
         ])),

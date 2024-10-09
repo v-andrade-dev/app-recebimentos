@@ -1,4 +1,5 @@
 import 'package:app_flutter/resource/app_colors.dart';
+import 'package:app_flutter/resource/custom_appbar.dart';
 import 'package:app_flutter/resource/custom_card.dart';
 import 'package:flutter/material.dart';
 
@@ -14,12 +15,9 @@ class _NotificationsState extends State<Notifications> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Notificações",
-          style: TextStyle(color: AppColors.secondary.withGreen(100)),
-        ),
-        backgroundColor: AppColors.primary,
+      appBar: const CustomAppBar(
+        title: "Notificações",
+        backArrow: false,
       ),
       body: Container(
         //decoration: BoxDecoration(color: AppColors.primary.withOpacity(0.3)),

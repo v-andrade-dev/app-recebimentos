@@ -1,4 +1,5 @@
 import 'package:app_flutter/resource/app_colors.dart';
+import 'package:app_flutter/resource/custom_appbar.dart';
 import 'package:app_flutter/screens/packages_services/packages_card.dart';
 import 'package:flutter/material.dart';
 
@@ -15,15 +16,9 @@ class _PendingPackagesState extends State<PendingPackages> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-          backgroundColor: AppColors.primary,
-          title: const Text(
-            "Entregas Pendentes",
-          ),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () => Navigator.pop(context),
-          )),
+      appBar: const CustomAppBar(
+        title: "Entregas Pendentes",
+      ),
       body: Column(
         children: getPackages(),
       ),
@@ -36,17 +31,14 @@ class _PendingPackagesState extends State<PendingPackages> {
           padding: const EdgeInsets.all(8),
           child: ClipRRect(
             borderRadius: BorderRadius.all(Radius.circular(24)),
-            child: Container(
-              decoration: BoxDecoration(color: AppColors.primary),
-              child: ExpansionTile(
-                title: Container(
-                  child: Text("Item 1"),
-                ),
-                children: [
-                  PackagesCard(
-                      imageSource: "assets/images/closed2.png", title: "Titulo")
-                ],
+            child: ExpansionTile(
+              title: Container(
+                child: Text("Item 1"),
               ),
+              children: [
+                PackagesCard(
+                    imageSource: "assets/images/closed2.png", title: "Titulo")
+              ],
             ),
           )),
       Padding(
