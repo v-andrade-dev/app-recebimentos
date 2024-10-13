@@ -1,3 +1,4 @@
+import 'package:app_flutter/resource/app_colors.dart';
 import 'package:app_flutter/screens/admin_services/new_package.dart';
 import 'package:app_flutter/screens/packages_services/packages_card.dart';
 import 'package:app_flutter/screens/packages_services/pending_packages.dart';
@@ -15,9 +16,6 @@ class _AdminServicesState extends State<AdminServices> {
     "Entrega Programada 1",
     "Entrega Programada 2",
     "Entrega Programada 3",
-    "Entrega Programada 4",
-    "Entrega Programada 5",
-    "Entrega Programada 6"
   ];
 
   DateTime date = DateTime.now();
@@ -46,7 +44,7 @@ class _AdminServicesState extends State<AdminServices> {
           Text(date.toString()),
           SizedBox(
             height: 250,
-            width: 300,
+            //width: 300,
             child: SingleChildScrollView(
                 child: Column(
               children: getScheduled(),
@@ -85,7 +83,31 @@ class _AdminServicesState extends State<AdminServices> {
     List<Widget> list = [];
 
     for (var element in agendadas) {
-      list.add(ListTile(title: (Text(element))));
+      list.add(
+        SizedBox(
+            child: Card(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Column(
+                children: [
+                  Text(
+                    "Remetente: Amazon - Previsto: 15/10/2024",
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text("Destinatario: Usuario - Residencia: Casa 1")
+                ],
+              ),
+              TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    "Receber",
+                    style: TextStyle(color: AppColors.secondary),
+                  ))
+            ],
+          ),
+        )),
+      );
     }
 
     return list;
