@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 enum Users { admin, owner }
 
 class Home extends StatefulWidget {
-  const Home({super.key, this.user = Users.owner});
+  const Home({super.key, this.user = Users.admin});
 
   final Users user;
 

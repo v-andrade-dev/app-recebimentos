@@ -1,4 +1,8 @@
+import 'package:app_flutter/resource/app_colors.dart';
+import 'package:app_flutter/resource/custom_appbar.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:datetime_picker_formfield_new/datetime_picker_formfield.dart';
 
 class NewPackage extends StatefulWidget {
   const NewPackage({super.key});
@@ -9,54 +13,81 @@ class NewPackage extends StatefulWidget {
 
 class _NewPackageState extends State<NewPackage> {
   List<String> residences = ["Casa 1", "Casa 2", "Casa 3"];
+  String? dropdownValue;
+
   @override
   Widget build(BuildContext context) {
-    String dropdownValue = residences.first;
+    final format = DateFormat("dd-MM-yyyy");
+    dropdownValue = dropdownValue ?? residences.first;
 
     return Scaffold(
-      appBar: AppBar(title: Text("Cadastrar Encomenda")),
+      appBar: const CustomAppBar(
+        title: "Cadastrar Encomenda",
+      ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(24),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.topRight,
-                child: DropdownButton<String>(
-                  value: dropdownValue,
-                  onChanged: (value) {
-                    setState(() {
-                      dropdownValue = value!;
-                    });
-                  },
-                  items:
-                      residences.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
+              Text("Residência:"),
+              DropdownButton<String>(
+                value: dropdownValue,
+                onChanged: (String? value) {
+                  setState(() {
+                    dropdownValue = value!;
+                  });
+                },
+                items: residences.map<DropdownMenuItem<String>>((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+              ),
+              const Divider(
+                color: Colors.transparent,
               ),
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("Nome Completo:"),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
-                    child: TextFormField(),
+                  Text("Destinatário:"),
+                  TextFormField(),
+                  const Divider(
+                    color: Colors.transparent,
                   ),
-                  Text("CPF:"),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8, 0, 8, 24),
-                    child: TextFormField(),
+                  Text("Remetente:"),
+                  TextFormField(),
+                  const Divider(
+                    color: Colors.transparent,
                   ),
+                  SizedBox(
+                      width: 150,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text("Data de entrada:"),
+                          DateTimeField(
+                            format: format,
+                            onShowPicker: (context, currentValue) {
+                              return showDatePicker(
+                                context: context,
+                                firstDate: DateTime(1900),
+                                initialDate: currentValue ?? DateTime.now(),
+                                lastDate: DateTime(2100),
+                              );
+                            },
+                          ),
+                        ],
+                      )),
                   Align(
                     alignment: Alignment.topRight,
-                    child:
-                        ElevatedButton(onPressed: () {}, child: Text("Enviar")),
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Salvar"),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.secondary),
+                    ),
                   )
                 ],
               )
