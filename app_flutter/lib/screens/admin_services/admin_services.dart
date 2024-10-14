@@ -1,5 +1,6 @@
 import 'package:app_flutter/resource/app_colors.dart';
 import 'package:app_flutter/screens/admin_services/new_package.dart';
+import 'package:app_flutter/screens/admin_services/users_management.dart';
 import 'package:app_flutter/screens/packages_services/packages_card.dart';
 import 'package:app_flutter/screens/packages_services/pending_packages.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,12 @@ class _AdminServicesState extends State<AdminServices> {
             ),
           ),
           GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const UsersManagement()));
+            },
             child: const PackagesCard(
               imageSource: "assets/images/user.png",
               title: "Gerenciar Usuários",
