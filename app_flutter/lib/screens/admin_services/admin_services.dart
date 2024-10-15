@@ -79,7 +79,7 @@ class _AdminServicesState extends State<AdminServices> {
           GestureDetector(
             child: const PackagesCard(
               imageSource: "assets/images/finish.png",
-              title: "Entregas Finalizadas",
+              title: "Finalizar Entrega",
               height: 50,
             ),
           ),
