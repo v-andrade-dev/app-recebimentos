@@ -1,4 +1,5 @@
 import 'package:app_flutter/resource/app_colors.dart';
+import 'package:app_flutter/screens/admin_services/admin_pending_packages.dart';
 import 'package:app_flutter/screens/admin_services/new_package.dart';
 import 'package:app_flutter/screens/admin_services/users_management.dart';
 import 'package:app_flutter/screens/packages_services/packages_card.dart';
@@ -82,6 +83,12 @@ class _AdminServicesState extends State<AdminServices> {
               title: "Finalizar Entrega",
               height: 50,
             ),
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AdminPendingPackages()));
+            },
           ),
         ]));
   }
