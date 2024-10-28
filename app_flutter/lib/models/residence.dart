@@ -4,7 +4,11 @@ class Residence extends BaseModel {
   int? number;
   String? complement;
 
-  Residence({this.number, this.complement});
+  Residence({required this.number, this.complement});
+
+  factory Residence.fromMap(Map<String, dynamic> map) {
+    return Residence(number: map["number"], complement: map["complement"]);
+  }
 
   Residence.fromJson(Map<String, dynamic> json) {
     id = json['id'];
