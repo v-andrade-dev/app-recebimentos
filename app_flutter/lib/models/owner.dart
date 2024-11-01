@@ -7,21 +7,25 @@ class Owner extends BaseModel {
   String? email;
   Residence? residence;
 
+  Owner.empty() : super.empty();
   Owner(
-      {required this.name,
+      {int? id,
+      required this.name,
       required this.document,
       required this.email,
-      required this.residence});
+      required this.residence})
+      : super(id);
 
   factory Owner.fromMap(Map<String, dynamic> map) {
     return Owner(
+        id: map["id"],
         name: map["name"],
         document: map["document"],
         email: map["email"],
         residence: Residence.fromMap(map["residence"]));
   }
 
-  Owner.fromJson(Map<String, dynamic> json) {
+  Owner.fromJson(Map<String, dynamic> json) : super(json['id']) {
     id = json['id'];
     document = json['document'];
     email = json['email'];

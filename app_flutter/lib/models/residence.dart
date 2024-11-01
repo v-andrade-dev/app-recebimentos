@@ -4,13 +4,15 @@ class Residence extends BaseModel {
   int? number;
   String? complement;
 
-  Residence({required this.number, this.complement});
+  //Residence.newResidence({required this.number, this.complement});
+  Residence({int? id, required this.number, this.complement}) : super(id);
 
   factory Residence.fromMap(Map<String, dynamic> map) {
-    return Residence(number: map["number"], complement: map["complement"]);
+    return Residence(
+        id: map["id"], number: map["number"], complement: map["complement"]);
   }
 
-  Residence.fromJson(Map<String, dynamic> json) {
+  Residence.fromJson(Map<String, dynamic> json) : super(json['id']) {
     id = json['id'];
     number = json['number'];
     complement = json['complement'];
