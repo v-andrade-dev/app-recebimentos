@@ -1,11 +1,13 @@
 import 'package:app_flutter/backend/data/http_client.dart';
 import 'package:app_flutter/models/residence.dart';
 import 'dart:convert';
+import 'package:injectable/injectable.dart';
 
 abstract class IResidenceRepo {
   Future<List<Residence>> getResidences();
 }
 
+@Singleton(as: IResidenceRepo, env: [Environment.test])
 class ResidenceRepo implements IResidenceRepo {
   final IHttpClient client;
 
