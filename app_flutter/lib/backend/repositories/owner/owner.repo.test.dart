@@ -1,4 +1,3 @@
-import 'package:app_flutter/backend/config/environment.settings.dart';
 import 'package:app_flutter/backend/repositories/owner/owner.repo.dart';
 import 'package:app_flutter/models/owner.dart';
 import 'package:app_flutter/models/residence.dart';
@@ -15,19 +14,28 @@ class OwnerRepoTest implements IOwnerRepo {
 
   final List<Owner> _owners = [
     Owner(
+        id: 1,
         name: "Fulano",
         document: "111111",
         email: "mail.com",
         residence: Residence(number: 20)),
     Owner(
+        id: 2,
         name: "Fulano 2",
         document: "111111",
         email: "mail.com",
         residence: Residence(number: 30)),
     Owner(
+        id: 3,
         name: "Fulano 3",
         document: "111111",
         email: "mail.com",
-        residence: Residence(number: 40)),
+        residence: Residence(number: 50)),
   ];
+
+  @override
+  Future<void> saveOwner(Owner owner) {
+    _owners.add(owner);
+    return Future(() => ());
+  }
 }

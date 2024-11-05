@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:app_flutter/backend/config/environment.settings.dart';
 import 'package:app_flutter/backend/data/http_client.dart';
 import 'package:app_flutter/models/owner.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class IOwnerRepo {
   Future<List<Owner>> getOwners();
+  Future<void> saveOwner(Owner owner);
 }
 
 @Singleton(as: IOwnerRepo, env: [Environment.test])
@@ -33,5 +33,11 @@ class OwnerRepo implements IOwnerRepo {
     }
 
     throw Exception("Não foi possivel recuperar os dados");
+  }
+
+  @override
+  Future<void> saveOwner(Owner owner) {
+    // TODO: implement saveOwner
+    throw UnimplementedError();
   }
 }
