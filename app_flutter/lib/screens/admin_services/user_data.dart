@@ -4,6 +4,7 @@ import 'package:app_flutter/backend/repositories/residences/residence.repo.dart'
 import 'package:app_flutter/models/owner.dart';
 import 'package:app_flutter/models/residence.dart';
 import 'package:app_flutter/resource/app_colors.dart';
+import 'package:app_flutter/resource/app_confimation_dialog.dart';
 import 'package:flutter/material.dart';
 
 class UserData extends StatefulWidget {
@@ -98,14 +99,19 @@ class _UserDataState extends State<UserData> {
                       child: ElevatedButton(
                         onPressed: () {
                           selectedOwner?.residence = residenceValue;
-                          widget.ownerRepo.saveOwner(selectedOwner!);
+                          AppConfimationDialog.runTaskSucessOrError(context,
+                              () async {
+                            return await widget.ownerRepo
+                                .saveOwner(selectedOwner!);
+                          });
+                          Navigator.pop(context);
                         },
-                        child: Text(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.secondary),
+                        child: const Text(
                           "Salvar",
                           style: TextStyle(color: AppColors.neutral),
                         ),
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.secondary),
                       ),
                     )
                   ]),

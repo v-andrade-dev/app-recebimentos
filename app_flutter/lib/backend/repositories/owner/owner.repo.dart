@@ -6,7 +6,7 @@ import 'package:injectable/injectable.dart';
 
 abstract class IOwnerRepo {
   Future<List<Owner>> getOwners();
-  Future<void> saveOwner(Owner owner);
+  Future<bool> saveOwner(Owner owner);
 }
 
 @Singleton(as: IOwnerRepo, env: [Environment.test])
@@ -36,7 +36,7 @@ class OwnerRepo implements IOwnerRepo {
   }
 
   @override
-  Future<void> saveOwner(Owner owner) {
+  Future<bool> saveOwner(Owner owner) {
     // TODO: implement saveOwner
     throw UnimplementedError();
   }
