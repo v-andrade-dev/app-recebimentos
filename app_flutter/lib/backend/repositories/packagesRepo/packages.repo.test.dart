@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:app_flutter/backend/repositories/packages/packages.repo.dart';
+import 'package:app_flutter/backend/repositories/packagesRepo/packages.repo.dart';
 import 'package:app_flutter/models/package.dart';
 import 'package:app_flutter/models/residence.dart';
 import 'package:injectable/injectable.dart';

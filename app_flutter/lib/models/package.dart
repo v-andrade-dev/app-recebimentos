@@ -10,6 +10,7 @@ class Package extends BaseModel {
   bool? finish;
   Residence? residence;
 
+  Package.empty() : super.empty();
   Package(
       {int? id,
       required this.ownerName,
@@ -55,5 +56,10 @@ class Package extends BaseModel {
     data['finish'] = finish;
     data['residence'] = residence;
     return data;
+  }
+
+  @override
+  String toString() {
+    return "owner: $ownerName, shipper: $shipper, entryDate: $entryDate, residence: ${residence?.number.toString()}";
   }
 }
