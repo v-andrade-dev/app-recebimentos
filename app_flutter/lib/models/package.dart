@@ -8,6 +8,8 @@ class Package extends BaseModel {
   DateTime? deliveryDate;
   String? receiver;
   bool? finish;
+  DateTime? predictedDate;
+  bool? arrived;
   Residence? residence;
 
   Package.empty() : super.empty();
@@ -15,10 +17,12 @@ class Package extends BaseModel {
       {int? id,
       required this.ownerName,
       required this.shipper,
-      required this.entryDate,
+      this.entryDate,
       this.deliveryDate,
       this.receiver,
       this.finish,
+      this.predictedDate,
+      this.arrived,
       required this.residence})
       : super(id);
 

@@ -1,5 +1,11 @@
+import 'package:app_flutter/backend/injectable/injection.dart';
+import 'package:app_flutter/backend/repositories/packagesRepo/packages.repo.dart';
+import 'package:app_flutter/backend/repositories/residences/residence.repo.dart';
+import 'package:app_flutter/models/package.dart';
+import 'package:app_flutter/models/residence.dart';
 import 'package:app_flutter/resource/app_colors.dart';
 import 'package:app_flutter/resource/custom_appbar.dart';
+import 'package:app_flutter/resource/pending_packages_card.dart';
 import 'package:flutter/material.dart';
 
 class AdminPendingPackages extends StatefulWidget {
@@ -10,82 +16,96 @@ class AdminPendingPackages extends StatefulWidget {
 }
 
 class _AdminPendingPackagesState extends State<AdminPendingPackages> {
-  List<String> agendadas = [
-    "Entrega Programada 1",
-    "Entrega Programada 2",
-    "Entrega Programada 3",
-  ];
-  List<String> residences = ["Casa 1", "Casa 2", "Casa 3"];
-  String? dropdownValue;
+  IResidenceRepo residenceRepo = getIt<IResidenceRepo>();
+  IPackagesRepo packagesRepo = getIt<IPackagesRepo>();
+  late Future getResidences;
+
+  List<Package> agendadas = [];
+
+  List<Residence> residences = [];
+
+  Residence? residenceValue;
+
+  @override
+  void initState() {
+    getResidences = residenceRepo.getResidences();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: "Entregas Pendentes"),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text("Residência:"),
-            DropdownButton<String>(
-              value: dropdownValue,
-              onChanged: (String? value) {
-                setState(() {
-                  dropdownValue = value!;
-                });
-              },
-              items: residences.map<DropdownMenuItem<String>>((String value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(value),
-                );
-              }).toList(),
-            ),
-            if (dropdownValue != null)
-              SizedBox(
-                height: MediaQuery.sizeOf(context).height / 2,
-                //width: 300,
-                child: SingleChildScrollView(
-                    child: Column(
-                  children: getScheduled(),
-                )),
+      appBar: const CustomAppBar(title: "Entregas Pendentes"),
+      body: SingleChildScrollView(
+          child: FutureBuilder(
+        future: getResidences,
+        builder: ((context, snapshot) {
+          if (snapshot.hasError) {
+            return Text('Erro: ${snapshot.error}');
+          } else if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else {
+            residences = snapshot.data;
+            return Container(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Residência:"),
+                  DropdownButton<Residence>(
+                    value: residenceValue,
+                    onChanged: (Residence? value) {
+                      setState(() {
+                        residenceValue = value!;
+                      });
+                    },
+                    items: residences
+                        .map<DropdownMenuItem<Residence>>((Residence value) {
+                      return DropdownMenuItem<Residence>(
+                        value: value,
+                        child: Text(value.number.toString()),
+                      );
+                    }).toList(),
+                  ),
+                  if (residenceValue != null)
+                    FutureBuilder(
+                        future: packagesRepo.getPackages(),
+                        builder: ((context, snapshot) {
+                          if (snapshot.hasError) {
+                            return Text('Erro: ${snapshot.error}');
+                          } else if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else {
+                            agendadas = snapshot.data!;
+                            return SizedBox(
+                              height: MediaQuery.sizeOf(context).height / 2,
+                              //width: 300,
+                              child: SingleChildScrollView(
+                                  child: Column(
+                                children: getPendingPackages(),
+                              )),
+                            );
+                          }
+                        }))
+                ],
               ),
-          ],
-        ),
-      ),
+            );
+          }
+        }),
+      )),
     );
   }
 
-  List<Widget> getScheduled() {
+  List<Widget> getPendingPackages() {
     List<Widget> list = [];
 
     for (var element in agendadas) {
-      list.add(
-        SizedBox(
-            child: Card(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Column(
-                children: [
-                  Text(
-                    "Remetente: Amazon - Previsto: 15/10/2024",
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  Text("Destinatario: Usuario - Residencia: Casa 1")
-                ],
-              ),
-              TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    "Receber",
-                    style: TextStyle(color: AppColors.secondary),
-                  ))
-            ],
-          ),
-        )),
-      );
+      list.add(PendingPackagesCard(
+        owner: element.ownerName!,
+        shipper: element.shipper!,
+        residence: element.residence!.number.toString(),
+      ));
     }
 
     return list;

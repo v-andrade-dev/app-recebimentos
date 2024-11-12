@@ -3,6 +3,8 @@ import 'package:injectable/injectable.dart';
 
 abstract class IPackagesRepo {
   Future<List<Package>> getPackages();
+  Future<List<Package>> getPackageByResidenceID(int residenceID);
+  Future<List<Package>> getPredictedPackages();
   Future<bool> savePackages(Package package);
 }
 
@@ -17,6 +19,18 @@ class PackagesRepo implements IPackagesRepo {
   @override
   Future<bool> savePackages(Package package) {
     // TODO: implement savePackages
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Package>> getPackageByResidenceID(int residenceID) {
+    // TODO: implement getPackageByResidenceID
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Package>> getPredictedPackages() {
+    // TODO: implement getPredictedPackages
     throw UnimplementedError();
   }
 }
