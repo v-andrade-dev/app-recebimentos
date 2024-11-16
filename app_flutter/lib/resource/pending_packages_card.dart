@@ -1,42 +1,37 @@
+import 'package:app_flutter/models/package.dart';
 import 'package:app_flutter/resource/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class PendingPackagesCard extends StatelessWidget {
-  const PendingPackagesCard(
-      {super.key,
-      required this.owner,
-      required this.shipper,
-      required this.residence,
-      this.predictedDate});
+  const PendingPackagesCard({super.key, required this.package, this.finish});
 
-  final String shipper;
-  final String owner;
-  final String residence;
-  final DateTime? predictedDate;
+  final Package package;
+  final bool? finish;
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ExpansionTile(
         title: Text(
-          "Residencia: $residence - $owner",
+          "Residencia: ${package.residence!.number.toString()} - ${package.ownerName}",
           style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         children: [
           Column(children: [
             Text(
-              "Remetente: $shipper",
+              "Remetente: ${package.shipper}",
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
-            if (predictedDate != null)
-              Text(
-                "Previsto: $predictedDate",
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
+            Text(
+              finish == true
+                  ? "Data de entrada: ${package.entryDate}"
+                  : "Previsto: ${package.predictedDate}",
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
             TextButton(
                 onPressed: () {},
-                child: const Text(
-                  "Receber",
-                  style: TextStyle(color: AppColors.secondary),
+                child: Text(
+                  finish != true ? "Receber" : "Finalizar",
+                  style: const TextStyle(color: AppColors.secondary),
                 )),
           ])
         ],

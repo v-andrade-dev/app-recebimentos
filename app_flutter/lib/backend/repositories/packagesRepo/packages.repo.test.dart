@@ -9,13 +9,14 @@ import 'package:injectable/injectable.dart';
 class PackagesRepoTest implements IPackagesRepo {
   @override
   Future<List<Package>> getPackages() {
-    return Future(() => _packages);
+    return Future(() => _packages.where((e) => e.entryDate != null).toList());
   }
 
   @override
   Future<List<Package>> getPackageByResidenceID(int residenceID) {
-    return Future(
-        () => _packages.where((e) => e.residence!.id == residenceID).toList());
+    return Future(() => _packages
+        .where((e) => e.residence!.id == residenceID && e.entryDate != null)
+        .toList());
   }
 
   @override
@@ -45,7 +46,7 @@ class PackagesRepoTest implements IPackagesRepo {
       ownerName: 'Ciclano',
       shipper: "Mercado Livre",
       entryDate: DateTime(2024, 11, 09),
-      residence: Residence(id: 2, number: 30),
+      residence: Residence(id: 1, number: 20),
     ),
     Package(
       id: 2,

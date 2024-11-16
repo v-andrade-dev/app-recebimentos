@@ -1,7 +1,6 @@
 import 'package:app_flutter/backend/injectable/injection.dart';
 import 'package:app_flutter/backend/repositories/packagesRepo/packages.repo.dart';
 import 'package:app_flutter/models/package.dart';
-import 'package:app_flutter/resource/app_colors.dart';
 import 'package:app_flutter/resource/pending_packages_card.dart';
 import 'package:app_flutter/screens/admin_services/admin_pending_packages.dart';
 import 'package:app_flutter/screens/admin_services/new_package.dart';
@@ -18,7 +17,7 @@ class AdminServices extends StatefulWidget {
 
 class _AdminServicesState extends State<AdminServices> {
   IPackagesRepo packagesRepo = getIt<IPackagesRepo>();
-  List<Package> agendadas = [];
+  List<Package> pendingPackages = [];
 
   DateTime date = DateTime.now();
   ScrollController scrollController = ScrollController();
@@ -32,7 +31,7 @@ class _AdminServicesState extends State<AdminServices> {
           } else if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           } else {
-            agendadas = snapshot.data!;
+            pendingPackages = snapshot.data!;
             return Container(
               height: MediaQuery.sizeOf(context).height,
               padding: const EdgeInsets.fromLTRB(16, 64, 24, 16),
@@ -100,8 +99,9 @@ class _AdminServicesState extends State<AdminServices> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) =>
-                                const AdminPendingPackages()));
+                            builder: (context) => AdminPendingPackages(
+                                  packagesRepo: packagesRepo,
+                                )));
                   },
                 ),
               ]),
@@ -113,12 +113,9 @@ class _AdminServicesState extends State<AdminServices> {
   List<Widget> getPredictedPackages() {
     List<Widget> list = [];
 
-    for (var element in agendadas) {
+    for (var element in pendingPackages) {
       list.add(PendingPackagesCard(
-        owner: element.ownerName!,
-        shipper: element.shipper!,
-        residence: element.residence!.number.toString(),
-        predictedDate: element.predictedDate,
+        package: element,
       ));
     }
 

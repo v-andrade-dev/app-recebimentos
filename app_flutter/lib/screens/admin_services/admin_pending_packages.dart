@@ -3,13 +3,14 @@ import 'package:app_flutter/backend/repositories/packagesRepo/packages.repo.dart
 import 'package:app_flutter/backend/repositories/residences/residence.repo.dart';
 import 'package:app_flutter/models/package.dart';
 import 'package:app_flutter/models/residence.dart';
-import 'package:app_flutter/resource/app_colors.dart';
 import 'package:app_flutter/resource/custom_appbar.dart';
 import 'package:app_flutter/resource/pending_packages_card.dart';
 import 'package:flutter/material.dart';
 
 class AdminPendingPackages extends StatefulWidget {
-  const AdminPendingPackages({super.key});
+  const AdminPendingPackages({super.key, required this.packagesRepo});
+
+  final IPackagesRepo packagesRepo;
 
   @override
   State<AdminPendingPackages> createState() => _AdminPendingPackagesState();
@@ -19,11 +20,8 @@ class _AdminPendingPackagesState extends State<AdminPendingPackages> {
   IResidenceRepo residenceRepo = getIt<IResidenceRepo>();
   IPackagesRepo packagesRepo = getIt<IPackagesRepo>();
   late Future getResidences;
-
-  List<Package> agendadas = [];
-
+  List<Package> pendingPackages = [];
   List<Residence> residences = [];
-
   Residence? residenceValue;
 
   @override
@@ -69,7 +67,8 @@ class _AdminPendingPackagesState extends State<AdminPendingPackages> {
                   ),
                   if (residenceValue != null)
                     FutureBuilder(
-                        future: packagesRepo.getPackages(),
+                        future: packagesRepo
+                            .getPackageByResidenceID(residenceValue!.id!),
                         builder: ((context, snapshot) {
                           if (snapshot.hasError) {
                             return Text('Erro: ${snapshot.error}');
@@ -77,7 +76,7 @@ class _AdminPendingPackagesState extends State<AdminPendingPackages> {
                               ConnectionState.waiting) {
                             return const CircularProgressIndicator();
                           } else {
-                            agendadas = snapshot.data!;
+                            pendingPackages = snapshot.data!;
                             return SizedBox(
                               height: MediaQuery.sizeOf(context).height / 2,
                               //width: 300,
@@ -100,11 +99,10 @@ class _AdminPendingPackagesState extends State<AdminPendingPackages> {
   List<Widget> getPendingPackages() {
     List<Widget> list = [];
 
-    for (var element in agendadas) {
+    for (var element in pendingPackages) {
       list.add(PendingPackagesCard(
-        owner: element.ownerName!,
-        shipper: element.shipper!,
-        residence: element.residence!.number.toString(),
+        package: element,
+        finish: true,
       ));
     }
 
