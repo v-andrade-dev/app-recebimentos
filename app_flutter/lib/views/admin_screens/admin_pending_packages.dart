@@ -1,10 +1,10 @@
-import 'package:app_flutter/backend/injectable/injection.dart';
-import 'package:app_flutter/backend/repositories/packagesRepo/packages.repo.dart';
-import 'package:app_flutter/backend/repositories/residences/residence.repo.dart';
+import 'package:app_flutter/backend/config/injectable/injection.dart';
+import 'package:app_flutter/backend/data/repositories/packagesRepo/packages.repo.dart';
+import 'package:app_flutter/backend/data/repositories/residences/residence.repo.dart';
 import 'package:app_flutter/models/package.dart';
 import 'package:app_flutter/models/residence.dart';
-import 'package:app_flutter/resource/custom_appbar.dart';
-import 'package:app_flutter/resource/pending_packages_card.dart';
+import 'package:app_flutter/resource/widgets/custom_appbar.dart';
+import 'package:app_flutter/views/common/pending_packages_card.dart';
 import 'package:flutter/material.dart';
 
 class AdminPendingPackages extends StatefulWidget {

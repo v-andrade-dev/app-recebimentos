@@ -1,9 +1,9 @@
 import 'dart:io';
 
 import 'package:app_flutter/backend/config/environment.settings.dart';
-import 'package:app_flutter/backend/injectable/injection.dart';
-import 'package:app_flutter/screens/home.dart';
-import 'package:app_flutter/screens/login.dart';
+import 'package:app_flutter/backend/config/injectable/injection.dart';
+import 'package:app_flutter/views/home.dart';
+import 'package:app_flutter/views/login.dart';
 import 'package:flutter/material.dart';
 
 class MyHttpOverrides extends HttpOverrides {

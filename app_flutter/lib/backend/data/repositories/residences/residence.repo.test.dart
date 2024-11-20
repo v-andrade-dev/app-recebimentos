@@ -1,4 +1,4 @@
-import 'package:app_flutter/backend/repositories/residences/residence.repo.dart';
+import 'package:app_flutter/backend/data/repositories/residences/residence.repo.dart';
 import 'package:app_flutter/models/residence.dart';
 import 'package:injectable/injectable.dart';
 

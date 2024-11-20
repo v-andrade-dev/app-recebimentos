@@ -1,10 +1,9 @@
-import 'package:app_flutter/resource/app_colors.dart';
-import 'package:app_flutter/screens/packages_services/packages_card.dart';
-import 'package:app_flutter/screens/packages_services/pending_packages.dart';
+import 'package:app_flutter/views/common/menu_card.dart';
+import 'package:app_flutter/views/owner_screens/pending_packages.dart';
 import 'package:flutter/material.dart';
 
-class OwnerServices extends StatelessWidget {
-  const OwnerServices({super.key});
+class OwnerHome extends StatelessWidget {
+  const OwnerHome({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +36,14 @@ class OwnerServices extends StatelessWidget {
                     MaterialPageRoute(
                         builder: (context) => const PendingPackages()));
               },
-              child: const PackagesCard(
+              child: const MenuCard(
                 imageSource: "assets/images/closed2.png",
                 title: "Entregas Pendentes",
                 //width: 200,
               ),
             ),
             GestureDetector(
-              child: const PackagesCard(
+              child: const MenuCard(
                 imageSource: "assets/images/open2.png",
                 title: "Entregas Recebidas",
                 //width: 100,
@@ -53,7 +52,7 @@ class OwnerServices extends StatelessWidget {
             ),
           ]),
           GestureDetector(
-            child: const PackagesCard(
+            child: const MenuCard(
               imageSource: "assets/images/delivery2.png",
               title: "Agendar Entrega",
               //width: 100,

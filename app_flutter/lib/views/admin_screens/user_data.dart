@@ -1,10 +1,10 @@
-import 'package:app_flutter/backend/injectable/injection.dart';
-import 'package:app_flutter/backend/repositories/owner/owner.repo.dart';
-import 'package:app_flutter/backend/repositories/residences/residence.repo.dart';
+import 'package:app_flutter/backend/config/injectable/injection.dart';
+import 'package:app_flutter/backend/data/repositories/owner/owner.repo.dart';
+import 'package:app_flutter/backend/data/repositories/residences/residence.repo.dart';
 import 'package:app_flutter/models/owner.dart';
 import 'package:app_flutter/models/residence.dart';
 import 'package:app_flutter/resource/app_colors.dart';
-import 'package:app_flutter/resource/app_confimation_dialog.dart';
+import 'package:app_flutter/resource/widgets/app_confimation_dialog.dart';
 import 'package:flutter/material.dart';
 
 class UserData extends StatefulWidget {

@@ -1,5 +1,6 @@
 import 'package:app_flutter/models/package.dart';
 import 'package:app_flutter/resource/app_colors.dart';
+import 'package:app_flutter/views/admin_screens/finish_package.dart';
 import 'package:flutter/material.dart';
 
 class PendingPackagesCard extends StatelessWidget {
@@ -28,7 +29,16 @@ class PendingPackagesCard extends StatelessWidget {
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
             TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (finish == true) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => FinishPackage(
+                                  package: package,
+                                )));
+                  }
+                },
                 child: Text(
                   finish != true ? "Receber" : "Finalizar",
                   style: const TextStyle(color: AppColors.secondary),

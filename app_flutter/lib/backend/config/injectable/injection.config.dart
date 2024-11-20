@@ -9,16 +9,17 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:app_flutter/backend/data/http_client.dart' as _i995;
-import 'package:app_flutter/backend/repositories/owner/owner.repo.dart' as _i52;
-import 'package:app_flutter/backend/repositories/owner/owner.repo.test.dart'
+import 'package:app_flutter/backend/data/repositories/owner/owner.repo.dart'
+    as _i52;
+import 'package:app_flutter/backend/data/repositories/owner/owner.repo.test.dart'
     as _i295;
-import 'package:app_flutter/backend/repositories/packagesRepo/packages.repo.dart'
+import 'package:app_flutter/backend/data/repositories/packagesRepo/packages.repo.dart'
     as _i61;
-import 'package:app_flutter/backend/repositories/packagesRepo/packages.repo.test.dart'
+import 'package:app_flutter/backend/data/repositories/packagesRepo/packages.repo.test.dart'
     as _i70;
-import 'package:app_flutter/backend/repositories/residences/residence.repo.dart'
+import 'package:app_flutter/backend/data/repositories/residences/residence.repo.dart'
     as _i591;
-import 'package:app_flutter/backend/repositories/residences/residence.repo.test.dart'
+import 'package:app_flutter/backend/data/repositories/residences/residence.repo.test.dart'
     as _i107;
 import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;

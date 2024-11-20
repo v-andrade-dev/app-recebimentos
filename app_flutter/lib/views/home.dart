@@ -1,9 +1,9 @@
 import 'package:app_flutter/resource/app_colors.dart';
-import 'package:app_flutter/resource/custom_navbar.dart';
-import 'package:app_flutter/screens/notifications.dart';
-import 'package:app_flutter/screens/options.dart';
-import 'package:app_flutter/screens/admin_services/admin_services.dart';
-import 'package:app_flutter/screens/packages_services/owner_services.dart';
+import 'package:app_flutter/resource/widgets/custom_navbar.dart';
+import 'package:app_flutter/views/admin_screens/admin_home.dart';
+import 'package:app_flutter/views/notifications.dart';
+import 'package:app_flutter/views/options.dart';
+import 'package:app_flutter/views/owner_screens/owner_home.dart';
 import 'package:flutter/material.dart';
 
 enum Users { admin, owner }
@@ -51,9 +51,10 @@ class _HomeState extends State<Home> {
 
   List<Widget> getTabs() {
     List<Widget> list = [];
-    list.add(widget.user == Users.admin ? AdminServices() : OwnerServices());
-    list.add(Notifications());
-    list.add(Options());
+    list.add(
+        widget.user == Users.admin ? const AdminHome() : const OwnerHome());
+    list.add(const Notifications());
+    list.add(const Options());
 
     return list;
   }

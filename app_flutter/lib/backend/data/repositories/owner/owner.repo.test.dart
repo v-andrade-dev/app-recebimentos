@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:app_flutter/backend/repositories/owner/owner.repo.dart';
+import 'package:app_flutter/backend/data/repositories/owner/owner.repo.dart';
 import 'package:app_flutter/models/owner.dart';
 import 'package:app_flutter/models/residence.dart';
 import 'package:flutter/material.dart';

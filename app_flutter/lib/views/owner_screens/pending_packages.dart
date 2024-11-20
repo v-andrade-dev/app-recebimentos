@@ -1,6 +1,6 @@
 import 'package:app_flutter/resource/app_colors.dart';
-import 'package:app_flutter/resource/custom_appbar.dart';
-import 'package:app_flutter/screens/packages_services/packages_card.dart';
+import 'package:app_flutter/resource/widgets/custom_appbar.dart';
+import 'package:app_flutter/views/common/menu_card.dart';
 import 'package:flutter/material.dart';
 
 class PendingPackages extends StatefulWidget {
@@ -27,16 +27,14 @@ class _PendingPackagesState extends State<PendingPackages> {
 
   List<Widget> getPackages() {
     List<Widget> list = [
-      Padding(
+      const Padding(
           padding: const EdgeInsets.all(8),
           child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(24)),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
             child: ExpansionTile(
-              title: Container(
-                child: Text("Item 1"),
-              ),
+              title: Text("Item 1"),
               children: [
-                PackagesCard(
+                MenuCard(
                     imageSource: "assets/images/closed2.png", title: "Titulo")
               ],
             ),
@@ -44,15 +42,13 @@ class _PendingPackagesState extends State<PendingPackages> {
       Padding(
           padding: const EdgeInsets.all(8),
           child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(24)),
+            borderRadius: const BorderRadius.all(Radius.circular(24)),
             child: Container(
-              decoration: BoxDecoration(color: AppColors.primary),
-              child: ExpansionTile(
-                title: Container(
-                  child: Text("Item 2"),
-                ),
+              decoration: const BoxDecoration(color: AppColors.primary),
+              child: const ExpansionTile(
+                title: Text("Item 2"),
                 children: [
-                  PackagesCard(
+                  MenuCard(
                       imageSource: "assets/images/closed2.png", title: "Titulo")
                 ],
               ),

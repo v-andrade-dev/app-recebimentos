@@ -1,21 +1,21 @@
-import 'package:app_flutter/backend/injectable/injection.dart';
-import 'package:app_flutter/backend/repositories/packagesRepo/packages.repo.dart';
+import 'package:app_flutter/backend/config/injectable/injection.dart';
+import 'package:app_flutter/backend/data/repositories/packagesRepo/packages.repo.dart';
 import 'package:app_flutter/models/package.dart';
-import 'package:app_flutter/resource/pending_packages_card.dart';
-import 'package:app_flutter/screens/admin_services/admin_pending_packages.dart';
-import 'package:app_flutter/screens/admin_services/new_package.dart';
-import 'package:app_flutter/screens/admin_services/users_management.dart';
-import 'package:app_flutter/screens/packages_services/packages_card.dart';
+import 'package:app_flutter/views/common/pending_packages_card.dart';
+import 'package:app_flutter/views/admin_screens/admin_pending_packages.dart';
+import 'package:app_flutter/views/admin_screens/new_package.dart';
+import 'package:app_flutter/views/admin_screens/users_management.dart';
+import 'package:app_flutter/views/common/menu_card.dart';
 import 'package:flutter/material.dart';
 
-class AdminServices extends StatefulWidget {
-  const AdminServices({super.key});
+class AdminHome extends StatefulWidget {
+  const AdminHome({super.key});
 
   @override
-  State<AdminServices> createState() => _AdminServicesState();
+  State<AdminHome> createState() => _AdminHomeState();
 }
 
-class _AdminServicesState extends State<AdminServices> {
+class _AdminHomeState extends State<AdminHome> {
   IPackagesRepo packagesRepo = getIt<IPackagesRepo>();
   List<Package> pendingPackages = [];
 
@@ -70,7 +70,7 @@ class _AdminServicesState extends State<AdminServices> {
                         MaterialPageRoute(
                             builder: (context) => const NewPackage()));
                   },
-                  child: const PackagesCard(
+                  child: const MenuCard(
                     imageSource: "assets/images/icon.png",
                     title: "Nova Encomenda",
                     height: 50,
@@ -83,14 +83,14 @@ class _AdminServicesState extends State<AdminServices> {
                         MaterialPageRoute(
                             builder: (context) => const UsersManagement()));
                   },
-                  child: const PackagesCard(
+                  child: const MenuCard(
                     imageSource: "assets/images/user.png",
                     title: "Gerenciar Usuários",
                     height: 50,
                   ),
                 ),
                 GestureDetector(
-                  child: const PackagesCard(
+                  child: const MenuCard(
                     imageSource: "assets/images/finish.png",
                     title: "Finalizar Entrega",
                     height: 50,

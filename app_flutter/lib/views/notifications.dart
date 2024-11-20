@@ -1,6 +1,5 @@
-import 'package:app_flutter/resource/app_colors.dart';
-import 'package:app_flutter/resource/custom_appbar.dart';
-import 'package:app_flutter/resource/custom_card.dart';
+import 'package:app_flutter/resource/widgets/custom_appbar.dart';
+import 'package:app_flutter/resource/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 
 class Notifications extends StatefulWidget {

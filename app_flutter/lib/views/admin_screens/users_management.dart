@@ -1,9 +1,9 @@
-import 'package:app_flutter/backend/injectable/injection.dart';
-import 'package:app_flutter/backend/repositories/owner/owner.repo.dart';
+import 'package:app_flutter/backend/config/injectable/injection.dart';
+import 'package:app_flutter/backend/data/repositories/owner/owner.repo.dart';
 import 'package:app_flutter/models/owner.dart';
 import 'package:app_flutter/resource/app_colors.dart';
-import 'package:app_flutter/resource/custom_appbar.dart';
-import 'package:app_flutter/screens/admin_services/user_data.dart';
+import 'package:app_flutter/resource/widgets/custom_appbar.dart';
+import 'package:app_flutter/views/admin_screens/user_data.dart';
 import 'package:flutter/material.dart';
 
 class UsersManagement extends StatefulWidget {

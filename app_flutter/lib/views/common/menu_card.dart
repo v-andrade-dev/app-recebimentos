@@ -1,8 +1,8 @@
 import 'package:app_flutter/resource/app_colors.dart';
 import 'package:flutter/material.dart';
 
-class PackagesCard extends StatelessWidget {
-  const PackagesCard(
+class MenuCard extends StatelessWidget {
+  const MenuCard(
       {super.key,
       required this.imageSource,
       required this.title,
